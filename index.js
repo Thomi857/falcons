@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to display cocktail names in the display div
   const displayCocktailNames = (cocktails) => {
+    const filteredCocktails = cocktails.filter(cocktail => cocktail.id >= 1 && cocktail.id <= 10);
+    cocktails = filteredCocktails;
     const displayDiv = document.querySelector('#display');
     displayDiv.innerHTML = '';
 
@@ -24,13 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
       cocktailNameDiv.classList.add('cocktail-name');
       
       // Fallback for all cocktail data(in case it is missing or undefined)
-      cocktailNameDiv.textContent = cocktail.name || "Unknown Cocktail"; 
+      cocktailNameDiv.textContent = cocktail.name  
 
       const imageUrl = cocktail.image || "path/to/default-image.jpg"; 
       cocktailNameDiv.dataset.image = imageUrl;
-      cocktailNameDiv.dataset.name = cocktail.name || "Unknown",
-      cocktailNameDiv.dataset.ingredients = JSON.stringify(cocktail.ingredients || []),
-      cocktailNameDiv.dataset.price = String(cocktail.price || "N/A"),
+      cocktailNameDiv.dataset.name = cocktail.name ,
+      cocktailNameDiv.dataset.ingredients = JSON.stringify(cocktail.ingredients ),
+      cocktailNameDiv.dataset.price = String(cocktail.price),
       
       displayDiv.appendChild(cocktailNameDiv);
 
@@ -88,84 +90,68 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.getElementById("feedback-form").addEventListener("submit", async function(event) {
-  event.preventDefault(); 
 
-  // Gather input values
-  const name = document.getElementById("feedback-name").value;
-  const email = document.getElementById("feedback-email").value;
-  const message = document.getElementById("feedback-message").value;
+const FormEl = document.getElementById("feedback-form");
 
-  // Create a feedback object
-  const feedbackData = {
-      name: name,
-      email: email,
-      message: message
-  };
+FormEl.addEventListener("submit", event => {
+  event.preventDefault();
 
-  try {
-      // Send a PATCH request to your server
-      const response = await fetch("http://localhost:3000/feedback", {
-          method: "PATCH", 
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(feedbackData)
+  const formData = new FormData(FormEl);
+  const data = Object.fromEntries(formData.entries());
+  console.log(data);
+
+ fetch("http://localhost:3000/cocktails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    console.log( data);
+  })
+  .catch(error => {
+    console.error("Error:", error);
+  });
+});
+
+const fetchFeedback = () => {
+  fetch("http://localhost:3000/cocktails")
+    .then(response => response.json())
+    .then(feedbackData => {
+
+      const filteredFeedback = feedbackData.filter(feedback => feedback.id < 1 || feedback.id > 10);
+
+      const feedbackContainer = document.getElementById("feedback-display");
+      feedbackContainer.innerHTML = ""; 
+
+      filteredFeedback.forEach(feedback => {
+        const feedbackDiv = document.createElement("div");
+        feedbackDiv.classList.add("feedback-item");
+
+        const nameElement = document.createElement("p");
+        nameElement.textContent = `Name: ${feedback.name}`;
+
+        const emailElement = document.createElement("p");
+        emailElement.textContent = `Email: ${feedback.email}`;
+
+        const messageElement = document.createElement("p");
+        messageElement.textContent = `Message: ${feedback.message}`;
+
+        feedbackDiv.appendChild(nameElement);
+        feedbackDiv.appendChild(emailElement);
+        feedbackDiv.appendChild(messageElement);
+
+        feedbackContainer.appendChild(feedbackDiv);
       });
+    })
+    .catch(error => {
+      console.error("Error fetching feedback:", error);
+    });
+};
 
-      if (!response.ok) {
-          throw new Error("Network response was not ok");
-      }
-
-      const result = await response.json();
-      console.log("Feedback submitted successfully:", result);
-      
-      // Optionally, clearthe form fields
-      document.getElementById("feedback-form").reset();
-  } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-  }
-});
-
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
-
-app.use(bodyParser.json());
-
-app.patch("/feedback", (req, res) => {
-    const feedback = req.body; // Get the feedback data from the request body
-    // Here you would typically update your JSON data or database
-    console.log("Received feedback:", feedback);
-    res.status(200).json({ message: "Feedback received successfully!" });
-});
-
-
-
-
-//       // Send the data to the server
-//       postData('http://localhost:3000/cocktails', drink);
-//     });
-//   }
-
-// // Function to send data to the server
-// async function postData(url = '', data = {}) {
-//   try {
-//     const response = await fetch(url, {
-//       method: 'POST', 
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(data)
-//     });         
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-
-//     const result = await response.json();
-//     console.log('Success:', result);
-//     return result;
-//   } catch (error) {
-//     console.error('Error posting data:', error);
-//   }
-// }
+// Call fetchFeedback to display feedback on page load
+fetchFeedback();
