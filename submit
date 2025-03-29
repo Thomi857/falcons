@@ -1,0 +1,25 @@
+document.getElementById('block').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  const characterId = this.dataset.cock;
+
+  if (characterId) {
+    const currentVotes = parseInt(document.getElementById('vote-count').textContent);
+    const newVotes = parseInt(document.getElementById('votes').value);
+    const updatedVotes = currentVotes + newVotes;
+
+    document.getElementById('vote-count').textContent = updatedVotes;
+
+    this.reset();
+
+    fetch(`http://localhost:3000/characters/${characterId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ votes: updatedVotes }),
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error updating votes:', error));
+  }
+});
