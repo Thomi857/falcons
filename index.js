@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     dataSpace.appendChild(priceElement);
   };
 
-  getCocktails(); // Fetch cocktail data
+  getCocktails(); 
 
 });
 
@@ -107,12 +107,8 @@ FormEl.addEventListener("submit", event => {
     },
     body: JSON.stringify(data)
   })
-  .then(response => {
-    return response.json();
-  })
-  .then(data => {
-    console.log( data);
-  })
+  .then(response => { return response.json();})
+  .then(data => {console.log( data);})
   .catch(error => {
     console.error("Error:", error);
   });
@@ -153,5 +149,5 @@ const fetchFeedback = () => {
     });
 };
 
-// Call fetchFeedback to display feedback on page load
 fetchFeedback();
+

@@ -71,16 +71,10 @@
       "price": "$8"
     },
     {
-      "id": "03bb",
-      "name": "Cliff Linus Thomi",
-      "email": "cliff.thomi@student.moringaschool.com",
-      "message": "Hello world\n"
-    },
-    {
       "id": "8874",
       "name": "Cliff Linus Thomi",
       "email": "cliff.thomi@student.moringaschool.com",
-      "message": "hello."
+      "message": "The drinks were great and so were the services.."
     },
     {
       "id": "a0fa",
@@ -93,6 +87,19 @@
       "name": "Evans kamau",
       "email": "Evansk@gmail.com",
       "message": "Special"
+    },
+    {
+      "id": "8c46",
+      "name": "patrick",
+      "email": "patto@gmail.com",
+      "message": "The drinks were great and so were the services."
+    },
+    {
+      "id": "b452",
+      "name": "Kiragu",
+      "email": "kiragu@gmail.com",
+      "message": "thank you."
     }
+ 
   ]
 }
