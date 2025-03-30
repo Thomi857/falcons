@@ -25,7 +25,7 @@ The `json-server --watch db.json` command is used to start a JSON server that pr
 ## Getting Started
 1. Access the application by visiting:
     ```
-   [[, https://falcons-app.com]](https://thomi857.github.io/falcons/)
+(https://thomi857.github.io/falcons/)
     ```
 
 
