@@ -10,7 +10,7 @@ Welcome to the Falcons project! This application is designed to provide an intui
 - [Support](#support)
 
 ## Introduction
-The Falcons project is a user-friendly application aimed at [briefly describe the purpose of your project]. It helps users [state the main goal or problem it solves].
+The Falcons project is a user-friendly application aimed at introducing customers to morderen classic cocktail drinks. It helps users get to know the type of drinks they want.
 
 ## Server
 
@@ -18,21 +18,21 @@ The `json-server --watch db.json` command is used to start a JSON server that pr
 
 
 ## Features
-- Easy-to-use interface for [specific functionality].
+- Easy-to-use interface for interactivity.
 - Fast and reliable performance.
-- [Additional feature relevant to end users].
+- Users are able to see what we are offering at the moment.
 
 ## Getting Started
 1. Access the application by visiting:
     ```
-    [, https://falcons-app.com]
+   [[, https://falcons-app.com]](https://thomi857.github.io/falcons/)
     ```
-2. Follow the on-screen instructions to create an account or log in.
+
 
 ## Usage
 - Navigate through the application using the menu.
 - Access [specific feature] by clicking on [specific section].
-- For help, refer to the [Support](#support) section.
+- For help, refer to the [Support](#thomilinus5@gmail.com) section.
 
 ## Support
 If you encounter any issues or have questions, please contact our support team at:
