@@ -1,5 +1,5 @@
 # Falcons Project
-
+I was able to use .filter  method to filter the goods from the comments.
 Welcome to the Falcons project! This application is designed to provide an intuitive and seamless experience for end users.
 
 ## Table of Contents
